@@ -1,3 +1,9 @@
+Install the dependencies:
+
+```
+npm install
+```
+
 Fire up the database:
 
 ```
