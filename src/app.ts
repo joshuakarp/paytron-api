@@ -7,7 +7,6 @@ class App {
 
   constructor() {
     this.app = express();
-    // this.config();
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.paymentRoute.routes(this.app);
