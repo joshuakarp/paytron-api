@@ -60,7 +60,7 @@ class PaymentRoutes {
           try {
             const payment = await this.paymentController.get(paymentId);
             if (!payment) {
-              res.status(404).send(`Payment of ID ${paymentId} does not exist.`);
+              res.status(404).send(`Payment of ID ${paymentId} does not exist. Failed to retrieve.`);
               return;
             }
             res.status(200).send(payment);
@@ -96,8 +96,12 @@ class PaymentRoutes {
               return;
             }
             res.status(200).send(updated);
-          } catch (e) {
-            res.status(500).send(e);
+          } catch (e: any) {
+            if (e.code === 'ConditionalCheckFailedException') {
+              res.status(404).send(`Payment of ID ${paymentId} does not exist. Failed to update.`);
+            } else {
+              res.status(500).send(e);
+            }
           }
         }
       );

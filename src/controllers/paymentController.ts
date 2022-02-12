@@ -54,6 +54,8 @@ class PaymentController {
       Key: { id: id },
       UpdateExpression:
         'set #amount = :amount, #beneficiary = :beneficiary, #description = :description',
+      ConditionExpression:
+        'attribute_exists(id)',
       ExpressionAttributeNames: {
         '#amount': 'amount',
         '#beneficiary': 'beneficiary',
